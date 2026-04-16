@@ -1,39 +1,24 @@
 <?php
+include "db.php";
+
 header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="gpa_export.csv"');
+header('Content-Disposition: attachment; filename="gpa_results.csv"');
 
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "gpa_db";
+$output = fopen("php://output", "w");
 
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+fputcsv($output, ["Student", "Semester", "GPA", "Status"]);
 
-$output = fopen('php://output', 'w');
-fputcsv($output, ['Student', 'Semester', 'Course', 'Credits', 'Grade', 'Grade Points', 'GPA', 'Created At']);
+$result = $conn->query("SELECT * FROM results");
 
-$sql = "SELECT student, semester, course, credits, grade, credits*grade AS grade_points, gpa, created_at FROM gpa_records ORDER BY created_at DESC";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()){
-        fputcsv($output, [
-            $row['student'],
-            $row['semester'],
-            $row['course'],
-            $row['credits'],
-            $row['grade'],
-            $row['grade_points'],
-            $row['gpa'],
-            $row['created_at']
-        ]);
-    }
+while ($row = $result->fetch_assoc()) {
+    fputcsv($output, [
+        $row['student'],
+        $row['semester'],
+        $row['gpa'],
+        $row['status']
+    ]);
 }
 
 fclose($output);
-$conn->close();
-exit();
+exit;
 ?>
