@@ -7,13 +7,12 @@ $("#addCourse").click(function () {
 });
 
 $("#gpaForm").submit(function (e) {
-
     e.preventDefault();
 
     $.ajax({
         url: "calculate.php",
         type: "POST",
-        data: $("#gpaForm").serialize(),
+        data: $(this).serialize(),
         dataType: "json",
 
         success: function (res) {
@@ -28,26 +27,15 @@ $("#gpaForm").submit(function (e) {
             $("#result").html(
                 <div class="alert ${color}">
                 ${res.message}
-                </div> + res.tableHtml
+                </div>
             );
 
-            // Progress bar
             let percent = (res.gpa / 4) * 100;
 
             $("#bar").css("width", percent + "%");
             $("#bar").text(res.gpa.toFixed(2));
-
-            if (res.gpa >= 3.7)
-                $("#bar").attr("class","progress-bar bg-success");
-            else if (res.gpa >= 3.0)
-                $("#bar").attr("class","progress-bar bg-primary");
-            else if (res.gpa >= 2.0)
-                $("#bar").attr("class","progress-bar bg-warning");
-            else
-                $("#bar").attr("class","progress-bar bg-danger");
         }
     });
-
 });
 
-});    
+});
