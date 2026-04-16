@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>GPA Calculator Step 4</title>
+<title>Step 4 GPA</title>
 
 <link rel="stylesheet"
 href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -15,27 +15,23 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <body class="container mt-5">
 
-<h1 class="mb-4">GPA Calculator</h1>
+<h1>GPA Calculator Step 4</h1>
 
 <div id="result"></div>
 
 <form id="gpaForm">
 
-<input type="text" name="student" class="form-control mb-2"
-placeholder="Student Name" required>
+<input type="text" name="student" class="form-control mb-2" placeholder="Student" required>
 
-<input type="text" name="semester" class="form-control mb-2"
-placeholder="Semester" required>
+<input type="text" name="semester" class="form-control mb-2" placeholder="Semester" required>
 
 <div id="courses">
 
 <div class="course-row form-row mb-2">
 
-<input type="text" name="course[]" class="form-control col"
-placeholder="Course" required>
+<input type="text" name="course[]" class="form-control col" required>
 
-<input type="number" name="credits[]" class="form-control col-2"
-placeholder="Credits" min="1" required>
+<input type="number" name="credits[]" class="form-control col-2" min="1" required>
 
 <select name="grade[]" class="form-control col-2">
 <option value="4">A</option>
@@ -53,15 +49,13 @@ placeholder="Credits" min="1" required>
 + Add Course
 </button>
 
-<br>
-
 <button type="submit" class="btn btn-primary">
 Calculate GPA
 </button>
 
 </form>
 
-<div class="progress mt-4">
+<div class="progress mt-3">
 <div id="bar" class="progress-bar" style="width:0%">0</div>
 </div>
 
