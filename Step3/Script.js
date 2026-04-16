@@ -19,10 +19,11 @@ $("#gpaForm").submit(function (e) {
 
             $("#result").html(
                 <div class="alert alert-info">
-                GPA: ${res.gpa.toFixed(2)} <br>
-                ${res.message}
+                    GPA: ${res.gpa.toFixed(2)} <br>
+                    ${res.message}
                 </div>
             );
+
         }
     });
 });
