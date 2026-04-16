@@ -3,6 +3,7 @@
 
 <head>
 <meta charset="UTF-8">
+<title>GPA Calculator Step 4</title>
 
 <link rel="stylesheet"
 href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -10,13 +11,11 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script src="script.js" defer></script>
-
-<title>GPA Calculator</title>
 </head>
 
 <body class="container mt-5">
 
-<h1>GPA Calculator</h1>
+<h1 class="mb-4">GPA Calculator</h1>
 
 <div id="result"></div>
 
@@ -36,7 +35,7 @@ placeholder="Semester" required>
 placeholder="Course" required>
 
 <input type="number" name="credits[]" class="form-control col-2"
-min="1" placeholder="Credits" required>
+placeholder="Credits" min="1" required>
 
 <select name="grade[]" class="form-control col-2">
 <option value="4">A</option>
@@ -50,22 +49,23 @@ min="1" placeholder="Credits" required>
 
 </div>
 
-<button type="button" id="addCourse"
-class="btn btn-secondary mb-3">+ Add Course</button>
+<button type="button" id="addCourse" class="btn btn-secondary mb-3">
++ Add Course
+</button>
 
 <br>
 
-<button type="submit" class="btn btn-primary">Calculate GPA</button>
+<button type="submit" class="btn btn-primary">
+Calculate GPA
+</button>
 
 </form>
 
-<!-- Progress Bar -->
-<div class="progress mt-3">
+<div class="progress mt-4">
 <div id="bar" class="progress-bar" style="width:0%">0</div>
 </div>
 
-<!-- CSV -->
-<a href="download.php" class="btn btn-success mt-3">
+<a href="export.php" class="btn btn-success mt-3">
 Download CSV
 </a>
 
