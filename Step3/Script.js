@@ -17,13 +17,20 @@ $("#gpaForm").submit(function (e) {
 
         success: function (res) {
 
-            $("#result").html(
-                <div class="alert alert-info">
-                    GPA: ${res.gpa.toFixed(2)} <br>
-                    ${res.message}
-                </div>
-            );
-
+            if (res.success) {
+                $("#result").html(
+                    "<div class='alert alert-info'>" +
+                    res.message + "<br><br>" +
+                    res.tableHtml +
+                    "</div>"
+                );
+            } else {
+                $("#result").html(
+                    "<div class='alert alert-danger'>" +
+                    res.message +
+                    "</div>"
+                );
+            }
         }
     });
 });
