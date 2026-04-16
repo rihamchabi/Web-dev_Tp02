@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 include "db.php";
 
-if (isset($_POST['course'], $_POST['credits'], $_POST['grade'])) {
+if (isset($_POST['course'], $_POST['credits'], $_POST['grade'], $_POST['student'], $_POST['semester'])) {
 
 $courses = $_POST['course'];
 $credits = $_POST['credits'];
@@ -61,8 +61,10 @@ echo json_encode([
 ]);
 
 } else {
-echo json_encode(["success"=>false]);
+echo json_encode(["success"=>false,"message"=>"No valid data"]);
 }
 
+} else {
+echo json_encode(["success"=>false,"message"=>"Missing data"]);
 }
 ?>
