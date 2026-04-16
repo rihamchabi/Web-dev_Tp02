@@ -3,23 +3,19 @@
 
 <head>
 <meta charset="UTF-8">
-<title>GPA Calculator jQuery + Bootstrap</title>
+<title>Step 3 GPA</title>
 
 <link rel="stylesheet"
 href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<link rel="stylesheet" href="style.css">
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script src="script.js" defer></script>
 </head>
 
 <body class="container mt-5">
 
-<h1 class="mb-4">GPA Calculator</h1>
+<h1>GPA Calculator Step 3</h1>
 
 <div id="result"></div>
 
@@ -29,9 +25,9 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <div class="course-row form-row mb-2">
 
-<input type="text" name="course[]" class="form-control col" placeholder="Course" required>
+<input type="text" name="course[]" class="form-control col" required>
 
-<input type="number" name="credits[]" class="form-control col-2" min="1" placeholder="Credits" required>
+<input type="number" name="credits[]" class="form-control col-2" min="1" required>
 
 <select name="grade[]" class="form-control col-2">
 <option value="4">A</option>
@@ -45,11 +41,13 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 </div>
 
-<button type="button" id="addCourse" class="btn btn-secondary mb-3">+ Add Course</button>
+<button type="button" id="addCourse" class="btn btn-secondary mb-3">
++ Add Course
+</button>
 
-<br>
-
-<button type="submit" class="btn btn-primary">Calculate GPA</button>
+<button type="submit" class="btn btn-primary">
+Calculate GPA
+</button>
 
 </form>
 
