@@ -1,7 +1,7 @@
 <?php
-$conn = new mysqli("localhost","root","","gpa_db_riham");
+$conn = new mysqli("localhost", "root", "", "gpa_db_riham");
 
 if ($conn->connect_error) {
-    die("Connection failed");
+    die("Connection failed: " . $conn->connect_error);
 }
 ?>
