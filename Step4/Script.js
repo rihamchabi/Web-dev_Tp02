@@ -1,31 +1,41 @@
 $(document).ready(function () {
 
-$("#addCourse").click(function () {
-    let row = $(".course-row").first().clone();
-    row.find("input").val("");
-    $("#courses").append(row);
-});
+    $("#addCourseBtn").click(function () {
+        let row = $(".course-row").first().clone();
+        row.find("input").val("");
+        row.find("select").val("4");
+        $("#courses").append(row);
+    });
 
-$("#gpaForm").submit(function (e) {
-    e.preventDefault();
-
-    $.ajax({
-        url: "calculate.php",
-        type: "POST",
-        data: $(this).serialize(),
-        dataType: "json",
-
-        success: function (res) {
-
-            $("#result").html(
-                <div class="alert alert-info">
-                    GPA: ${res.gpa.toFixed(2)} <br>
-                    ${res.message}
-                </div>
-            );
-
+    $(document).on("click", ".delete-btn", function () {
+        if ($(".course-row").length > 1) {
+            $(this).closest(".course-row").remove();
         }
     });
-});
+
+    $("#gpaForm").submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: "../calculate.php",
+            type: "POST",
+            data: $(this).serialize(),
+            dataType: "json",
+
+            success: function (res) {
+                $("#result").html(
+                    "<div class='alert alert-success'>" +
+                    "GPA: " + res.gpa + "<br>" +
+                    res.message +
+                    "</div>"
+                );
+            },
+
+            error: function () {
+                $("#result").html("<div class='alert alert-danger'>Server Error</div>");
+            }
+        });
+
+    });
 
 });
