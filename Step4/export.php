@@ -1,24 +1,19 @@
 <?php
-include "db.php";
+$conn = new mysqli("localhost","root","","gpa_db_riham");
 
 header('Content-Type: text/csv');
 header('Content-Disposition: attachment; filename="gpa_results.csv"');
 
-$output = fopen("php://output", "w");
+$out = fopen("php://output", "w");
 
-fputcsv($output, ["Student", "Semester", "GPA", "Status"]);
+fputcsv($out, ["Student","Semester","GPA","Status"]);
 
-$result = $conn->query("SELECT * FROM results");
+$res = $conn->query("SELECT * FROM results");
 
-while ($row = $result->fetch_assoc()) {
-    fputcsv($output, [
-        $row['student'],
-        $row['semester'],
-        $row['gpa'],
-        $row['status']
-    ]);
+while ($row = $res->fetch_assoc()) {
+    fputcsv($out, $row);
 }
 
-fclose($output);
+fclose($out);
 exit;
 ?>
