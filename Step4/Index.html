@@ -1,29 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
 <meta charset="UTF-8">
 <title>GPA Calculator</title>
 
-<link rel="stylesheet"
-href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script src="script.js" defer></script>
+<script src="script.js"></script>
 </head>
 
-<body class="container mt-5">
+<body class="container mt-4">
 
-<h1>GPA Calculator</h1>
+<h2>GPA Calculator</h2>
 
 <div id="result"></div>
 
 <form id="gpaForm">
 
 <input type="text" name="student" class="form-control mb-2" placeholder="Student Name" required>
-
-<input type="text" name="semester" class="form-control mb-2" placeholder="Semester" required>
+<input type="text" name="semester" class="form-control mb-3" placeholder="Semester" required>
 
 <div id="courses">
 
@@ -31,9 +26,9 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <input type="text" name="course[]" class="form-control col" placeholder="Course" required>
 
-<input type="number" name="credits[]" class="form-control col-2" min="1" placeholder="Credits" required>
+<input type="number" name="credits[]" class="form-control col-2" placeholder="Credits" required>
 
-<select name="grade[]" class="form-control col-2">
+<select name="grade[]" class="form-control col-2" required>
 <option value="4">A</option>
 <option value="3">B</option>
 <option value="2">C</option>
@@ -41,19 +36,18 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <option value="0">F</option>
 </select>
 
-</div>
+<button type="button" class="btn btn-danger btn-sm delete-btn ml-2">X</button>
 
 </div>
 
-<button type="button" id="addCourse" class="btn btn-secondary mb-3">
-+ Add Course
-</button>
+</div>
 
-<button type="submit" class="btn btn-primary">
-Calculate GPA
-</button>
+<button type="button" id="addCourseBtn" class="btn btn-secondary mt-2">+ Add Course</button>
+<button type="submit" class="btn btn-primary mt-2">Calculate GPA</button>
 
 </form>
+
+<a href="../export.php" class="btn btn-success mt-3">Download CSV</a>
 
 </body>
 </html>
