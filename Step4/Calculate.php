@@ -1,70 +1,44 @@
 <?php
 header('Content-Type: application/json');
-include "db.php";
 
-if (isset($_POST['course'], $_POST['credits'], $_POST['grade'], $_POST['student'], $_POST['semester'])) {
+$conn = new mysqli("localhost","root","","gpa_db_riham");
 
-$courses = $_POST['course'];
-$credits = $_POST['credits'];
-$grades  = $_POST['grade'];
+if ($conn->connect_error) {
+    echo json_encode(["success"=>false,"message"=>"DB connection failed"]);
+    exit;
+}
 
 $student = $_POST['student'];
 $semester = $_POST['semester'];
 
-$totalPoints = 0;
-$totalCredits = 0;
+$credits = $_POST['credits'];
+$grades = $_POST['grade'];
 
-$table = "<table class='table table-bordered'>
-<tr><th>Course</th><th>Credits</th><th>Grade</th><th>Points</th></tr>";
+$total = 0;
+$sum = 0;
 
-for ($i = 0; $i < count($courses); $i++) {
-
-$cr = floatval($credits[$i]);
-$g  = floatval($grades[$i]);
-
-if ($cr <= 0) continue;
-
-$pts = $cr * $g;
-
-$totalPoints += $pts;
-$totalCredits += $cr;
-
-$table .= "<tr>
-<td>{$courses[$i]}</td>
-<td>$cr</td>
-<td>$g</td>
-<td>$pts</td>
-</tr>";
+for ($i = 0; $i < count($credits); $i++) {
+    $total += $credits[$i] * $grades[$i];
+    $sum += $credits[$i];
 }
 
-$table .= "</table>";
+$gpa = ($sum > 0) ? round($total / $sum, 2) : 0;
 
-if ($totalCredits > 0) {
+$status = ($gpa >= 3) ? "Pass" : "Fail";
 
-$gpa = $totalPoints / $totalCredits;
+$ok = $conn->query("INSERT INTO results(student,semester,gpa,status)
+VALUES ('$student','$semester','$gpa','$status')");
 
-if ($gpa >= 3.7) $status = "Distinction";
-elseif ($gpa >= 3.0) $status = "Merit";
-elseif ($gpa >= 2.0) $status = "Pass";
-else $status = "Fail";
-
-// save DB
-$stmt = $conn->prepare("INSERT INTO results(student,semester,gpa,status) VALUES (?,?,?,?)");
-$stmt->bind_param("ssds",$student,$semester,$gpa,$status);
-$stmt->execute();
-
-echo json_encode([
-"success"=>true,
-"gpa"=>$gpa,
-"message"=>"Your GPA is ".number_format($gpa,2)." ($status)",
-"tableHtml"=>$table
-]);
-
+if ($ok) {
+    echo json_encode([
+        "success"=>true,
+        "gpa"=>$gpa,
+        "message"=>"Saved successfully"
+    ]);
 } else {
-echo json_encode(["success"=>false,"message"=>"No valid data"]);
-}
-
-} else {
-echo json_encode(["success"=>false,"message"=>"Missing data"]);
+    echo json_encode([
+        "success"=>false,
+        "message"=>"Insert failed"
+    ]);
 }
 ?>
